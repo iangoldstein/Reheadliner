@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Content Modifier Script
+// @name         Reheadliner
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Modify content on specific sites
-// @author       You
+// @description  Restore headlines to Twitter on Web
+// @author       Ian Goldstein
 // @match        *://twitter.com/*
 // @match        *://x.com/*
 // @grant        none
@@ -11,6 +11,21 @@
 
 (function() {
     'use strict';
+
+    // Function to check if the site is in dark mode
+    function isDarkMode() {
+        // Get the computed background color of the body
+        const bgColor = window.getComputedStyle(document.body).backgroundColor;
+
+        // Convert the background color to an array of RGB values
+        const rgb = bgColor.replace(/[^\d,]/g, '').split(',').map(Number);
+
+        // Compute the brightness of the color
+        const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+
+        // Return true if brightness is below a threshold, say 128
+        return brightness < 128;
+    }
 
     function modifyContent() {
         // Disconnect observer to prevent loop during DOM changes
@@ -25,6 +40,7 @@
                 const firstSpaceIndex = labelText.indexOf(' ');
                 const url = labelText.substring(0, firstSpaceIndex);
                 const headline = labelText.substring(firstSpaceIndex + 1);
+                const textColor = isDarkMode() ? 'rgba(231,233,234,1.00)' : 'black';
 
                 const matchingSpan = Array.from(parentDiv.querySelectorAll('span')).find(span => span.textContent.trim() === url);
                 if (matchingSpan) {
@@ -37,7 +53,7 @@
 
                 const headlineDiv = document.createElement('div');
                 headlineDiv.textContent = headline;
-                headlineDiv.style.color = 'dimgray';
+                headlineDiv.style.color = textColor;
 
                 const bottomContentDiv = document.createElement('div');
                 bottomContentDiv.style.display = 'inline-block';
