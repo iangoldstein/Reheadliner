@@ -20,6 +20,7 @@ function modifyContent() {
 
             const headlineDiv = document.createElement('div');
             headlineDiv.textContent = headline;
+            headlineDiv.style.color = 'dimgray';
 
             const bottomContentDiv = document.createElement('div');
             bottomContentDiv.style.display = 'inline-block';
