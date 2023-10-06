@@ -50,10 +50,12 @@
                 const urlDiv = document.createElement('div');
                 urlDiv.textContent = url;
                 urlDiv.style.color = 'gray';
+                urlDiv.style.marginBottom = '5px';
 
                 const headlineDiv = document.createElement('div');
                 headlineDiv.textContent = headline;
                 headlineDiv.style.color = textColor;
+                headlineDiv.style.marginBottom = '5px';
 
                 const bottomContentDiv = document.createElement('div');
                 bottomContentDiv.style.display = 'inline-block';
@@ -62,7 +64,7 @@
 
                 bottomContentDiv.appendChild(urlDiv);
                 bottomContentDiv.appendChild(headlineDiv);
-                parentDiv.appendChild(bottomContentDiv);
+                anchorElement.appendChild(bottomContentDiv);
 
                 // Mark the div as modified
                 parentDiv.setAttribute('data-modified', 'true');

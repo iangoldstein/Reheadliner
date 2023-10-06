@@ -29,16 +29,14 @@ function modifyContent() {
             if (matchingSpan) {
                 matchingSpan.style.display = 'none';
             }
-
+            
             const urlDiv = document.createElement('div');
             urlDiv.textContent = url;
             urlDiv.style.color = 'gray';
-            urlDiv.style.marginBottom = '5px';
 
             const headlineDiv = document.createElement('div');
             headlineDiv.textContent = headline;
             headlineDiv.style.color = textColor;
-            headlineDiv.style.marginBottom = '5px';
 
             const bottomContentDiv = document.createElement('div');
             bottomContentDiv.style.display = 'inline-block';
@@ -47,7 +45,7 @@ function modifyContent() {
 
             bottomContentDiv.appendChild(urlDiv);
             bottomContentDiv.appendChild(headlineDiv);
-            anchorElement.appendChild(bottomContentDiv);
+            parentDiv.appendChild(bottomContentDiv); 
 
             // Mark the div as modified
             parentDiv.setAttribute('data-modified', 'true');
