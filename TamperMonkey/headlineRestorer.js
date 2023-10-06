@@ -44,7 +44,7 @@
 
                 const matchingSpan = Array.from(parentDiv.querySelectorAll('span')).find(span => span.textContent.trim() === url);
                 if (matchingSpan) {
-                    matchingSpan.style.display = 'none';
+                    matchingSpan.parentElement.parentElement.style.display = 'none';
                 }
 
                 const urlDiv = document.createElement('div');
